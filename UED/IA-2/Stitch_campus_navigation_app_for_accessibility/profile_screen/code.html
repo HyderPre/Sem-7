@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Profile - Campus Navigator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#007AFF",
+                        "primary-subtle": "rgba(0, 122, 255, 0.1)",
+                        "secondary": "#5AC8FA",
+                        "text-primary": "#1C1C1E",
+                        "text-secondary": "#636366",
+                        "background": "#FFFFFF",
+                        "border-color": "#E5E5EA",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 24px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-background group/design-root overflow-x-hidden">
+<!-- Top App Bar -->
+<div class="flex items-center bg-background p-4 pb-2 justify-between sticky top-0 z-10 border-b border-border-color">
+<div class="flex size-12 shrink-0 items-center text-text-primary">
+<span class="material-symbols-outlined">arrow_back</span>
+</div>
+<h2 class="text-text-primary text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">Profile</h2>
+<div class="flex w-12 items-center justify-end">
+<p class="text-primary text-base font-bold leading-normal tracking-[0.015em] shrink-0">Edit</p>
+</div>
+</div>
+<!-- Profile Header -->
+<div class="flex p-4 @container pt-8">
+<div class="flex w-full flex-col gap-4 items-center">
+<div class="flex gap-4 flex-col items-center">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-32 w-32" data-alt="User avatar of Alex Doe" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAhcYPBGL_J8ge1mDdEYR7bCfpZ-2hoew0zo5mPPH-K6k2l2-l2Ci0qZzm7SCJRVr8MuUnnvTdDjl5o5ns94WyRKzuVryeV00oqN_l-mYuCCVU5LvcS5FsvUgk-mYlhfxySvrjDZjz1vD_2_WqYo6oLWTFpmNZBKq62p1qfGCY34Z9UQUhUqxu1YE4WhXCwAN-bNE4HD6WQ3a-BTQqiVILW6wbpsg1Q1UxA0VISM45GQ2Cra3eecHSo8EkJZYaOt6ES7ZGY3UQaggY");'></div>
+<div class="flex flex-col items-center justify-center">
+<p class="text-text-primary text-[22px] font-bold leading-tight tracking-[-0.015em] text-center">Alex Doe</p>
+<p class="text-text-secondary text-base font-normal leading-normal text-center">alex.doe@university.edu</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Spacer -->
+<div class="h-4 bg-background"></div>
+<!-- Account Details Section -->
+<h3 class="text-text-primary text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Account Details</h3>
+<div class="flex flex-col mx-4 bg-background rounded-xl border border-border-color overflow-hidden">
+<!-- List Item: Major -->
+<div class="flex items-center gap-4 bg-background px-4 min-h-[72px] py-2 justify-between border-b border-border-color">
+<div class="flex items-center gap-4">
+<div class="text-secondary flex items-center justify-center rounded-lg bg-primary-subtle shrink-0 size-12">
+<span class="material-symbols-outlined">school</span>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-text-primary text-base font-medium leading-normal line-clamp-1">Major</p>
+<p class="text-text-secondary text-sm font-normal leading-normal line-clamp-2">Computer Science</p>
+</div>
+</div>
+</div>
+<!-- List Item: Graduation Year -->
+<div class="flex items-center gap-4 bg-background px-4 min-h-[72px] py-2 justify-between border-b border-border-color">
+<div class="flex items-center gap-4">
+<div class="text-secondary flex items-center justify-center rounded-lg bg-primary-subtle shrink-0 size-12">
+<span class="material-symbols-outlined">calendar_month</span>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-text-primary text-base font-medium leading-normal line-clamp-1">Expected Graduation</p>
+<p class="text-text-secondary text-sm font-normal leading-normal line-clamp-2">2026</p>
+</div>
+</div>
+</div>
+<!-- List Item: Status -->
+<div class="flex items-center gap-4 bg-background px-4 min-h-[72px] py-2 justify-between">
+<div class="flex items-center gap-4">
+<div class="text-secondary flex items-center justify-center rounded-lg bg-primary-subtle shrink-0 size-12">
+<span class="material-symbols-outlined">badge</span>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-text-primary text-base font-medium leading-normal line-clamp-1">Status</p>
+<p class="text-text-secondary text-sm font-normal leading-normal line-clamp-2">Student</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Accessibility Preferences Section -->
+<h3 class="text-text-primary text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-8">Accessibility Preferences</h3>
+<div class="flex flex-col mx-4 bg-background rounded-xl border border-border-color overflow-hidden">
+<!-- List Item: Text Size -->
+<div class="flex items-center gap-4 bg-background px-4 min-h-[72px] py-2 justify-between border-b border-border-color">
+<div class="flex items-center gap-4">
+<div class="text-secondary flex items-center justify-center rounded-lg bg-primary-subtle shrink-0 size-12">
+<span class="material-symbols-outlined">text_fields</span>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-text-primary text-base font-medium leading-normal line-clamp-1">Text Size</p>
+</div>
+</div>
+<div class="shrink-0">
+<div class="flex items-center bg-gray-100 rounded-lg p-1 space-x-1">
+<button class="px-3 py-1 text-sm font-medium rounded-md text-text-secondary">S</button>
+<button class="px-3 py-1 text-sm font-bold rounded-md bg-white text-primary shadow-sm">M</button>
+<button class="px-3 py-1 text-sm font-medium rounded-md text-text-secondary">L</button>
+</div>
+</div>
+</div>
+<!-- List Item: High Contrast -->
+<div class="flex items-center gap-4 bg-background px-4 min-h-[72px] py-2 justify-between border-b border-border-color">
+<div class="flex items-center gap-4">
+<div class="text-secondary flex items-center justify-center rounded-lg bg-primary-subtle shrink-0 size-12">
+<span class="material-symbols-outlined">contrast</span>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-text-primary text-base font-medium leading-normal line-clamp-1">High Contrast Mode</p>
+</div>
+</div>
+<div class="shrink-0">
+<label class="relative flex h-[31px] w-[51px] cursor-pointer items-center rounded-full border-none bg-border-color p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary">
+<div class="h-full w-[27px] rounded-full bg-white" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px, rgba(0, 0, 0, 0.06) 0px 1px 2px;"></div>
+<input checked="" class="invisible absolute" type="checkbox"/>
+</label>
+</div>
+</div>
+<!-- List Item: Voice Assist -->
+<div class="flex items-center gap-4 bg-background px-4 min-h-[72px] py-2 justify-between">
+<div class="flex items-center gap-4">
+<div class="text-secondary flex items-center justify-center rounded-lg bg-primary-subtle shrink-0 size-12">
+<span class="material-symbols-outlined">record_voice_over</span>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-text-primary text-base font-medium leading-normal line-clamp-1">Voice Assist</p>
+</div>
+</div>
+<div class="shrink-0">
+<label class="relative flex h-[31px] w-[51px] cursor-pointer items-center rounded-full border-none bg-border-color p-0.5 has-[:checked]:justify-end has-[:checked]:bg-primary">
+<div class="h-full w-[27px] rounded-full bg-white" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px, rgba(0, 0, 0, 0.06) 0px 1px 2px;"></div>
+<input class="invisible absolute" type="checkbox"/>
+</label>
+</div>
+</div>
+</div>
+<!-- Spacer -->
+<div class="flex-grow bg-background"></div>
+<!-- Log Out Button -->
+<div class="p-4 pt-8 pb-8 bg-background">
+<button class="flex w-full min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 px-4 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">Log Out</span>
+</button>
+</div>
+</div>
+</body></html>

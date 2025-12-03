@@ -1,0 +1,199 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+double currentTime = 0.0;
+int loadersBusy = 0;
+int scalesBusy = 0;
+int trucksLoaded = 0;
+
+int totalTrucks;
+int totalLoaders;
+double simulationDuration;
+int numScales; 
+vector<int> loadTimes;
+vector<double> loadWeights;
+vector<int> weighTimes;
+vector<double> weighWeights;
+vector<int> travelTimes;
+vector<double> travelWeights;
+
+double totalLoaderBusyTime = 0.0;
+double totalScaleBusyTime = 0.0;
+double lastEventTime = 0.0;
+
+queue<int> loaderQueue;
+queue<int> weighQueue;
+
+enum EventType {
+    START_LOAD,
+    END_LOAD,
+    START_WEIGH,
+    END_WEIGH,
+    END_TRIP
+};
+
+struct Event {
+    double time;
+    EventType type;
+    int truckId;
+
+    bool operator>(const Event& other) const {
+        return time > other.time;
+    }
+};
+
+priority_queue<Event, vector<Event>, greater<Event>> eventList;
+
+mt19937 randomNumberGenerator(random_device{}());
+
+int getRandomTime(const vector<int>& times, const vector<double>& weights) {
+    if (times.empty() || times.size() != weights.size()) {
+        throw runtime_error("Invalid distribution data.");
+    }
+    discrete_distribution<> distribution(weights.begin(), weights.end()); 
+    return times[distribution(randomNumberGenerator)]; 
+}
+
+void getDistributionInput(const string& name, vector<int>& times, vector<double>& weights) {
+    int numEntries;
+    cout << "Enter number of entries for " << name << " time distribution: ";
+    cin >> numEntries;
+    times.resize(numEntries);
+    weights.resize(numEntries);
+    double totalWeight = 0.0;
+
+    for (int i = 0; i < numEntries; ++i) {
+        cout << "Enter time value " << i + 1 << ": ";
+        cin >> times[i];
+        cout << "Enter probability for time " << times[i] << ": ";
+        cin >> weights[i];
+        totalWeight += weights[i];
+    }
+
+    for (double& w : weights) {
+        w /= totalWeight;
+    }
+}
+
+void scheduleEvent(EventType type, double time, int truckId) { 
+    eventList.push({time, type, truckId}); 
+}
+
+void updateStats() {
+    double timeDiff = currentTime - lastEventTime;
+    totalLoaderBusyTime += timeDiff * loadersBusy;
+    totalScaleBusyTime += timeDiff * scalesBusy;
+    lastEventTime = currentTime;
+}
+
+void handleStartLoad(int truckId) {
+    loadersBusy++;
+    scheduleEvent(END_LOAD, currentTime + getRandomTime(loadTimes, loadWeights), truckId); 
+}
+
+void handleEndLoad(int truckId) { 
+    loadersBusy--;
+    weighQueue.push(truckId);
+    if (scalesBusy < numScales && !weighQueue.empty()) { 
+        int nextTruck = weighQueue.front();
+        weighQueue.pop();
+        scheduleEvent(START_WEIGH, currentTime, nextTruck);
+    }
+    if (loadersBusy < totalLoaders && !loaderQueue.empty()) {
+        int nextTruck = loaderQueue.front();
+        loaderQueue.pop();
+        scheduleEvent(START_LOAD, currentTime, nextTruck);
+    }
+}
+
+void handleStartWeigh(int truckId) {
+    scalesBusy++;
+    scheduleEvent(END_WEIGH, currentTime + getRandomTime(weighTimes, weighWeights), truckId); 
+}
+
+void handleEndWeigh(int truckId) {
+    scalesBusy--;
+    trucksLoaded++;
+    scheduleEvent(END_TRIP, currentTime + getRandomTime(travelTimes, travelWeights), truckId); 
+    if (!weighQueue.empty()) {
+        int nextTruck = weighQueue.front();
+        weighQueue.pop();
+        scheduleEvent(START_WEIGH, currentTime, nextTruck);
+    }
+}
+
+void handleEndTrip(int truckId) { 
+    loaderQueue.push(truckId);
+    if (loadersBusy < totalLoaders && !loaderQueue.empty()) {
+        int nextTruck = loaderQueue.front();
+        loaderQueue.pop();
+        scheduleEvent(START_LOAD, currentTime, nextTruck);
+    }
+}
+
+void runSimulation() {
+    for (int i = 0; i < totalTrucks; ++i) {
+        loaderQueue.push(i);
+    }
+    for (int i = 0; i < totalLoaders && !loaderQueue.empty(); ++i) {
+        int truckId = loaderQueue.front(); 
+        loaderQueue.pop();
+        scheduleEvent(START_LOAD, currentTime, truckId); 
+    }
+
+    while (!eventList.empty() && eventList.top().time < simulationDuration) {
+        Event currentEvent = eventList.top();
+        eventList.pop();
+
+        currentTime = currentEvent.time;
+        updateStats();
+
+        switch (currentEvent.type) {
+            case START_LOAD:
+                handleStartLoad(currentEvent.truckId);
+                break;
+            case END_LOAD:
+                handleEndLoad(currentEvent.truckId); 
+                break;
+            case START_WEIGH:
+                handleStartWeigh(currentEvent.truckId);
+                break;
+            case END_WEIGH:
+                handleEndWeigh(currentEvent.truckId); 
+                break;
+            case END_TRIP:
+                handleEndTrip(currentEvent.truckId); 
+                break;
+        }
+    }
+
+    double avgLoaderUtil = (totalLoaderBusyTime / totalLoaders) / currentTime;
+    double avgScaleUtil = (totalScaleBusyTime / numScales) / currentTime; 
+
+    cout << "\n--- Simulation Results ---" << endl;
+    cout << "Simulation Duration: " << currentTime << " minutes" << endl;
+    cout << "Total trucks loaded: " << trucksLoaded << endl;
+    cout << "Average Loader Utilization: " << avgLoaderUtil * 100 << "%" << endl;
+    cout << "Average Scale Utilization: " << avgScaleUtil * 100 << "%" << endl;
+}
+
+int main() {
+    cout << "--- Dump Truck Problem Simulation ---" << endl;
+    cout << "Enter number of trucks: ";
+    cin >> totalTrucks;
+    cout << "Enter number of loaders: ";
+    cin >> totalLoaders;
+    cout << "Enter number of scales: ";
+    cin >> numScales; 
+    cout << "Enter total simulation duration (in minutes): ";
+    cin >> simulationDuration;
+
+    getDistributionInput("loading", loadTimes, loadWeights);
+    getDistributionInput("weighing", weighTimes, weighWeights);
+    getDistributionInput("travel", travelTimes, travelWeights);
+
+    runSimulation();
+
+    return 0;
+}

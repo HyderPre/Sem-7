@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Campus Navigator</title>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#005A9C",
+              "accent": "#009688",
+              "background-light": "#f6f8f8",
+              "background-dark": "#101f22",
+              "text-light": "#1A1A1A",
+              "text-dark": "#e0e0e0",
+              "subtext-light": "#4f4f4f",
+              "subtext-dark": "#b0b0b0",
+              "card-light": "#ffffff",
+              "card-dark": "#1a2c2f"
+            },
+            fontFamily: {
+              "display": ["Public Sans", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark group/design-root overflow-x-hidden">
+<main class="flex-grow pb-32">
+<!-- Top App Bar -->
+<div class="flex flex-col gap-2 bg-background-light dark:bg-background-dark p-4 pb-2">
+<div class="flex items-center h-12 justify-between">
+<div class="flex size-12 shrink-0 items-center">
+<span class="material-symbols-outlined text-text-light dark:text-text-dark text-[28px]">arrow_back</span>
+</div>
+<div class="flex w-12 items-center justify-end">
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 w-10 bg-primary/20 text-primary gap-2 text-base font-bold leading-normal tracking-[0.015em] min-w-0 p-0">
+<span class="material-symbols-outlined text-primary text-[24px]">person</span>
+</button>
+</div>
+</div>
+<h1 class="text-text-light dark:text-text-dark tracking-light text-[28px] font-bold leading-tight">Library, Room 201</h1>
+</div>
+<!-- Current Step Card -->
+<div class="p-4 @container">
+<div class="flex flex-col items-stretch justify-start rounded-xl @xl:flex-row @xl:items-start shadow-[0_0_12px_rgba(0,0,0,0.08)] dark:shadow-none bg-card-light dark:bg-card-dark">
+<div class="flex w-full min-w-72 grow flex-col items-stretch justify-center gap-2 p-6">
+<div class="flex items-center gap-4">
+<div class="text-accent flex size-16 shrink-0 items-center justify-center rounded-lg bg-accent/20">
+<span class="material-symbols-outlined text-4xl">turn_left</span>
+</div>
+<div>
+<p class="text-text-light dark:text-text-dark text-2xl font-bold leading-tight tracking-[-0.015em]">Turn left in 50ft</p>
+<p class="text-subtext-light dark:text-subtext-dark text-base font-normal leading-normal">Towards the Student Union</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Section Header -->
+<h3 class="text-text-light dark:text-text-dark text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Upcoming steps</h3>
+<!-- Upcoming Steps List -->
+<div class="flex flex-col">
+<!-- List Item 1 -->
+<div class="flex items-center gap-4 bg-transparent px-4 min-h-[72px] py-2 justify-between">
+<div class="flex items-center gap-4">
+<div class="text-text-light dark:text-text-dark flex items-center justify-center rounded-lg bg-primary/20 shrink-0 size-12">
+<span class="material-symbols-outlined text-2xl">straight</span>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-text-light dark:text-text-dark text-base font-medium leading-normal line-clamp-1">Continue straight for 200ft</p>
+<p class="text-subtext-light dark:text-subtext-dark text-sm font-normal leading-normal line-clamp-2">Pass the cafeteria</p>
+</div>
+</div>
+<div class="shrink-0">
+<p class="text-subtext-light dark:text-subtext-dark text-base font-normal leading-normal">200ft</p>
+</div>
+</div>
+<!-- List Item 2 -->
+<div class="flex items-center gap-4 bg-transparent px-4 min-h-[72px] py-2 justify-between">
+<div class="flex items-center gap-4">
+<div class="text-text-light dark:text-text-dark flex items-center justify-center rounded-lg bg-primary/20 shrink-0 size-12">
+<span class="material-symbols-outlined text-2xl">turn_right</span>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-text-light dark:text-text-dark text-base font-medium leading-normal line-clamp-1">Turn right</p>
+<p class="text-subtext-light dark:text-subtext-dark text-sm font-normal leading-normal line-clamp-2 flex items-center gap-1.5"><span class="material-symbols-outlined text-base">ramp_right</span>Look for the accessible ramp</p>
+</div>
+</div>
+<div class="shrink-0">
+<p class="text-subtext-light dark:text-subtext-dark text-base font-normal leading-normal">250ft</p>
+</div>
+</div>
+<!-- List Item 3 -->
+<div class="flex items-center gap-4 bg-transparent px-4 min-h-[72px] py-2 justify-between">
+<div class="flex items-center gap-4">
+<div class="text-text-light dark:text-text-dark flex items-center justify-center rounded-lg bg-primary/20 shrink-0 size-12">
+<span class="material-symbols-outlined text-2xl">elevator</span>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-text-light dark:text-text-dark text-base font-medium leading-normal line-clamp-1">Take the elevator to Floor 2</p>
+<p class="text-subtext-light dark:text-subtext-dark text-sm font-normal leading-normal line-clamp-2">Elevator is on your left</p>
+</div>
+</div>
+<div class="shrink-0">
+<p class="text-subtext-light dark:text-subtext-dark text-base font-normal leading-normal">270ft</p>
+</div>
+</div>
+<!-- List Item 4 -->
+<div class="flex items-center gap-4 bg-transparent px-4 min-h-[72px] py-2 justify-between">
+<div class="flex items-center gap-4">
+<div class="text-text-light dark:text-text-dark flex items-center justify-center rounded-lg bg-primary/20 shrink-0 size-12">
+<span class="material-symbols-outlined text-2xl">flag</span>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-text-light dark:text-text-dark text-base font-medium leading-normal line-clamp-1">Destination will be on your right</p>
+<p class="text-subtext-light dark:text-subtext-dark text-sm font-normal leading-normal line-clamp-2">Room 201</p>
+</div>
+</div>
+<div class="shrink-0">
+<p class="text-subtext-light dark:text-subtext-dark text-base font-normal leading-normal">30ft</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Action Bar -->
+<div class="fixed bottom-0 left-0 right-0 bg-card-light/80 dark:bg-card-dark/80 backdrop-blur-lg border-t border-gray-200/50 dark:border-gray-700/50">
+<div class="flex items-center justify-between gap-4 p-4">
+<div class="flex items-center gap-3">
+<button class="flex items-center justify-center h-12 w-12 rounded-full bg-primary/20 text-primary">
+<span class="material-symbols-outlined text-2xl">volume_up</span>
+</button>
+<p class="text-text-light dark:text-text-dark font-medium">Voice Assistance</p>
+</div>
+<button class="flex-shrink-0 rounded-full bg-primary px-8 py-3 text-base font-bold text-white shadow-sm">End Route</button>
+</div>
+</div>
+</div>
+</body></html>

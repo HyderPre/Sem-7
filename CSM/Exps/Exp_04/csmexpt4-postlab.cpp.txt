@@ -1,0 +1,124 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+struct Event {
+    int time;
+    string type;
+
+    bool operator>(const Event& other) const {
+        return time > other.time;
+    }
+};
+
+void getUserInputForVector(vector<int>& vec, const string& prompt) {
+    cout << prompt << " (enter space-separated numbers, followed by a non-number): ";
+    string line;
+    cin.ignore();
+    getline(cin, line);
+    stringstream ss(line);
+    int value;
+    while (ss >> value) {
+        vec.push_back(value);
+    }
+}
+
+int main() {
+    unsigned seed = chrono::steady_clock::now().time_since_epoch().count();
+    default_random_engine rng(seed);
+
+    vector<int> time_between_calls;
+    getUserInputForVector(time_between_calls, "Enter time between calls");
+    
+    vector<int> able_service_times;
+    getUserInputForVector(able_service_times, "Enter service times for Able");
+
+    vector<int> baker_service_times;
+    getUserInputForVector(baker_service_times, "Enter service times for Baker");
+
+    if (time_between_calls.empty() || able_service_times.empty() || baker_service_times.empty()) {
+        cout << "Error: All input vectors must have at least one value." << endl;
+        return 1;
+    }
+
+    int num_calls;
+    cout << "Enter the number of calls to simulate: ";
+    cin >> num_calls;
+
+    uniform_int_distribution<int> time_dist(0, time_between_calls.size() - 1);
+    uniform_int_distribution<int> able_dist(0, able_service_times.size() - 1);
+    uniform_int_distribution<int> baker_dist(0, baker_service_times.size() - 1);
+
+    priority_queue<Event, vector<Event>, greater<Event>> event_list;
+
+    long long total_wait_time = 0;
+    long long total_idle_time_able = 0;
+    long long total_idle_time_baker = 0;
+    int calls_served_by_able = 0;
+    int calls_served_by_baker = 0;
+    int able_idle_start = 0;
+    int baker_idle_start = 0;
+
+    int current_time = 0;
+
+    bool able_available = true;
+    bool baker_available = true;
+
+    int next_call_time = time_between_calls[time_dist(rng)];
+    event_list.push({next_call_time, "call"});
+
+    for (int i = 0; i < num_calls; ++i) {
+        if (event_list.empty()) {
+            break;
+        }
+
+        Event imminent_event = event_list.top();
+        event_list.pop();
+
+        current_time = imminent_event.time;
+
+        if (imminent_event.type == "call") {
+            if (able_available) {
+                if (!able_available) {
+                    total_idle_time_able += current_time - able_idle_start;
+                }
+                int service_time = able_service_times[able_dist(rng)];
+                calls_served_by_able++;
+                able_available = false;
+                event_list.push({current_time + service_time, "able_done"});
+            } else if (baker_available) {
+                if (!baker_available) {
+                    total_idle_time_baker += current_time - baker_idle_start;
+                }
+                int service_time = baker_service_times[baker_dist(rng)];
+                calls_served_by_baker++;
+                baker_available = false;
+                event_list.push({current_time + service_time, "baker_done"});
+            }
+            
+            next_call_time = current_time + time_between_calls[time_dist(rng)];
+            event_list.push({next_call_time, "call"});
+
+        } else if (imminent_event.type == "able_done") {
+            able_available = true;
+            able_idle_start = current_time;
+        } else if (imminent_event.type == "baker_done") {
+            baker_available = true;
+            baker_idle_start = current_time;
+        }
+    }
+
+    if (able_available) {
+        total_idle_time_able += current_time - able_idle_start;
+    }
+    if (baker_available) {
+        total_idle_time_baker += current_time - baker_idle_start;
+    }
+
+    cout << "Total Calls Served by Able: " << calls_served_by_able << endl;
+    cout << "Total Calls Served by Baker: " << calls_served_by_baker << endl;
+    cout << "Total Idle Time of Able: " << total_idle_time_able << endl;
+    cout << "Total Idle Time of Baker: " << total_idle_time_baker << endl;
+
+    return 0;
+}

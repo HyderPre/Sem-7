@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Campus Navigator - Accessibility Setup</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#11b4d4",
+              "background-light": "#f6f8f8",
+              "background-dark": "#101f22",
+            },
+            fontFamily: {
+              "display": ["Public Sans", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-base text-stone-900 dark:text-stone-100">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="flex items-center p-4 pb-2 justify-between">
+<div class="flex size-12 shrink-0 items-center justify-start text-stone-900 dark:text-stone-100">
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center text-stone-900 dark:text-stone-100">Accessibility</h2>
+<div class="flex w-12 items-center justify-end"></div>
+</div>
+<main class="flex flex-col flex-1 px-4 pt-4 pb-6">
+<h1 class="text-stone-900 dark:text-stone-100 tracking-light text-[32px] font-bold leading-tight text-left pb-2">Welcome! Let's get started.</h1>
+<p class="text-stone-900 dark:text-stone-100 text-lg font-normal leading-normal pb-1">Do you have any accessibility needs?</p>
+<p class="text-stone-500 dark:text-stone-400 text-sm font-normal leading-normal pb-8">You can change this anytime in Settings.</p>
+<div class="flex flex-col gap-4">
+<div class="flex flex-col gap-1 rounded-xl bg-white dark:bg-stone-900 p-4 border border-stone-200 dark:border-stone-800 ring-2 ring-transparent has-[:checked]:ring-primary transition-all duration-200">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="text-stone-900 dark:text-stone-100 flex items-center justify-center rounded-lg bg-primary/20 shrink-0 size-12">
+<span class="material-symbols-outlined text-primary" style="font-size: 28px;">palette</span>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-stone-900 dark:text-stone-100 text-base font-medium leading-normal">Color Blindness</p>
+<p class="text-stone-500 dark:text-stone-400 text-sm font-normal leading-normal">Adjust colors for better visibility.</p>
+</div>
+</div>
+<div class="shrink-0">
+<input class="form-radio h-6 w-6 text-primary bg-stone-100 dark:bg-stone-800 border-stone-300 dark:border-stone-700 focus:ring-primary" id="color-blindness" name="accessibility_option" type="radio"/>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-1 rounded-xl bg-white dark:bg-stone-900 p-4 border border-stone-200 dark:border-stone-800 ring-2 ring-transparent has-[:checked]:ring-primary transition-all duration-200">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="text-stone-900 dark:text-stone-100 flex items-center justify-center rounded-lg bg-primary/20 shrink-0 size-12">
+<span class="material-symbols-outlined text-primary" style="font-size: 28px;">visibility</span>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-stone-900 dark:text-stone-100 text-base font-medium leading-normal">Low Vision</p>
+<p class="text-stone-500 dark:text-stone-400 text-sm font-normal leading-normal">Enables larger text &amp; voice assistance.</p>
+</div>
+</div>
+<div class="shrink-0">
+<input class="form-radio h-6 w-6 text-primary bg-stone-100 dark:bg-stone-800 border-stone-300 dark:border-stone-700 focus:ring-primary" id="low-vision" name="accessibility_option" type="radio"/>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-1 rounded-xl bg-white dark:bg-stone-900 p-4 border border-stone-200 dark:border-stone-800 ring-2 ring-transparent has-[:checked]:ring-primary transition-all duration-200">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="text-stone-900 dark:text-stone-100 flex items-center justify-center rounded-lg bg-primary/20 shrink-0 size-12">
+<span class="material-symbols-outlined text-primary" style="font-size: 28px;">accessibility_new</span>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-stone-900 dark:text-stone-100 text-base font-medium leading-normal">No special needs</p>
+<p class="text-stone-500 dark:text-stone-400 text-sm font-normal leading-normal">Use default app settings.</p>
+</div>
+</div>
+<div class="shrink-0">
+<input checked="" class="form-radio h-6 w-6 text-primary bg-stone-100 dark:bg-stone-800 border-stone-300 dark:border-stone-700 focus:ring-primary" id="no-needs" name="accessibility_option" type="radio"/>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-8">
+<button class="flex w-full items-center justify-center rounded-full bg-primary px-6 py-4 text-base font-bold text-white shadow-lg transition hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Continue</button>
+</div>
+</main>
+</div>
+</body></html>
